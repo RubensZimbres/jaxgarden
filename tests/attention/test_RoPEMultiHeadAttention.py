@@ -99,7 +99,8 @@ def test_rope_mha_masking():
 
     x = jax.random.normal(key, (batch_size, seq_len, embed_dim))
     # Create a causal mask (True means masked)
-    causal_mask = nn.make_causal_mask(x[:, :, 0])  # Gets (batch, seq, seq) or (1, seq, seq)
+    causal_mask = nn.make_causal_mask(x[:, :, 0])
+    # Gets (batch, seq, seq) or (1, seq, seq)
 
     rope_mha = RoPEMultiHeadAttention(num_heads=num_heads, head_dim=head_dim)
     params = rope_mha.init(key, x, causal_mask)["params"]
